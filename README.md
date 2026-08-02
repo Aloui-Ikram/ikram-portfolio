@@ -3,7 +3,7 @@
 Personal site for Ikram Aloui, cloud-native security engineer. Built with Next.js 16 (App Router),
 Tailwind CSS v4, and Framer Motion.
 
-Live at **[ikram-portfolio.vercel.app](https://ikram-portfolio.vercel.app)**.
+Live at **[aloui-ikram.github.io/ikram-portfolio](https://aloui-ikram.github.io/ikram-portfolio/)**.
 
 ## Editing content
 
@@ -54,12 +54,16 @@ To restyle both resumes at once, edit `resume/resume.css`.
 
 ## Deployment
 
-Deployed to Vercel as its own project, separate from any earlier portfolio:
+Deployed to GitHub Pages by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on
+every push to `main`. There is nothing to run by hand; the Actions tab can also redeploy on demand.
 
-```bash
-npx vercel          # first run: links/creates the project
-npx vercel --prod   # deploy to production
-```
+Pages serves the site from `/<repo>`, which is why `next.config.ts` sets `output: "export"` and
+`basePath`, and why `site.url` and `site.resumePath` are built from the `BASE_PATH` constant in
+`src/content/data.ts`. Next rewrites `<Link>` for `basePath` automatically but **not** a raw
+`<a href="/...">`, and the CV download is exactly that.
+
+To move to a root domain (a custom domain, or Vercel), drop `basePath` from `next.config.ts`, set
+`BASE_PATH` to `""`, and update `site.url`.
 
 ## Notes on the build
 
