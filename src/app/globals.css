@@ -1,26 +1,519 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Blush light theme. Neutrals are warmed toward pink rather than left grey,
+   so the accent reads as part of the palette instead of sitting on top of it.
+   Contrast ratios in comments are against --bg and were measured, not guessed. */
+:root,
+[data-theme="light"] {
+  --bg: #fff8fb;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #fdeef5;
+  --border: #f7dde9;
+  --border-strong: #efc4d9;
+  --fg: #2b1220; /* 16.6:1 */
+  --fg-muted: #6b4557; /* 7.7:1 */
+  --fg-subtle: #86677a; /* 5.0:1, never below 14px */
+  --accent: #c92a63; /* 5.0:1 */
+  --accent-fg: #ffffff; /* 5.3:1 on accent */
+  --accent-soft: rgba(201, 42, 99, 0.075);
+  --accent-border: rgba(201, 42, 99, 0.24);
+  --grid-line: rgba(201, 42, 99, 0.055);
+  --glow: rgba(255, 143, 191, 0.42);
+  --glow-2: rgba(167, 139, 250, 0.3);
+  --glow-3: rgba(255, 196, 224, 0.34);
+  /* Violet end of the headline gradient; a second hue keeps it from reading
+     as a flat pink wash. */
+  --accent-2: #8b5cf6;
+  /* Top-edge sheen on cards. Must be a rose tint, not white: --bg-elevated is
+     already #ffffff in this theme, so a white sheen would render as nothing. */
+  --sheen: rgba(253, 238, 245, 0.9);
+  --shadow: 0 1px 2px rgba(131, 24, 67, 0.05), 0 10px 30px -14px rgba(131, 24, 67, 0.16);
+}
+
+/* Deep plum rather than near-black: a warm dark that flatters the pink. */
+[data-theme="dark"] {
+  --bg: #120a14;
+  --bg-elevated: #1c1120;
+  --bg-subtle: #241628;
+  --border: #3a2440;
+  --border-strong: #4d3355;
+  --fg: #fdf2f8; /* 17.8:1 */
+  --fg-muted: #d0bcca; /* 10.9:1 */
+  --fg-subtle: #a992a5; /* 6.7:1 */
+  --accent: #ffb3d9; /* 11.8:1 */
+  --accent-fg: #2a0a1c; /* 11.0:1 on accent */
+  --accent-soft: rgba(255, 179, 217, 0.11);
+  --accent-border: rgba(255, 179, 217, 0.3);
+  --grid-line: rgba(255, 179, 217, 0.05);
+  --glow: rgba(255, 143, 191, 0.3);
+  --glow-2: rgba(196, 132, 252, 0.26);
+  --glow-3: rgba(255, 179, 217, 0.16);
+  --accent-2: #d8b4fe;
+  --sheen: rgba(255, 179, 217, 0.06);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 14px 34px -18px rgba(0, 0, 0, 0.6);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-border-base: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-accent-2: var(--accent-2);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Must sit in @layer base: unlayered rules outrank Tailwind's utility layer,
+   which would make every border-[...] utility silently do nothing. */
+@layer base {
+  * {
+    border-color: var(--border);
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  /* Serif site-wide, headings and body alike. Geist stays loaded as the fallback
+     metric and for anything that opts back out with .font-sans. */
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Escape hatch back to the sans face. */
+.font-sans {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Now that the serif is the body face too, this only nudges optical spacing on
+   the large display sizes; it no longer switches family. */
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.008em;
+}
+
+/* Ink to rose to violet across the headline. Display sizes only: the violet
+   tail is ~4.1:1 on the light --bg, which clears the 3:1 AA bar for large text
+   but NOT the 4.5:1 bar for body copy. Rose is 5.0:1 light / 11.8:1 dark. */
+.text-gradient {
+  background-image: linear-gradient(
+    104deg,
+    var(--fg) 12%,
+    var(--accent) 58%,
+    var(--accent-2) 96%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle blueprint grid: the only decorative flourish, static and GPU-cheap. */
+.grid-backdrop {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Two soft rose/violet fields behind the hero, drifting slowly against each
+   other. Transform and opacity only, so it composites on the GPU. */
+.accent-glow {
+  /* Keep these tight: a full-viewport radial gradient is rasterised during the
+     first paint, and enlarging them pushed LCP from 2.1s to 2.9s. */
+  background:
+    radial-gradient(ellipse 44% 40% at 30% 0%, var(--glow), transparent 70%),
+    radial-gradient(ellipse 40% 38% at 75% 10%, var(--glow-2), transparent 72%),
+    /* Third field is deliberately the smallest of the three: it adds depth low
+       in the hero without growing the total rasterised area much. */
+      radial-gradient(ellipse 30% 26% at 58% 74%, var(--glow-3), transparent 76%);
+}
+
+/* No text-shadow on the h1: a wide blur radius on the LCP element is costly to
+   paint and measurably delayed LCP. The glow behind it comes from .accent-glow. */
+
+/* Deliberately static. An infinite transform on a full-viewport gradient
+   re-rasters every frame: it cost ~5 Lighthouse performance points and burns
+   battery for a background nobody looks at. The two-tone field carries the
+   depth on its own; the motion on this page lives where it's noticed:
+   the hero entrance, scroll reveals, nav underline and card lift. */
+
+/* Scroll reveal. The hidden start state is scoped to .js, which the inline head
+   script adds before first paint, so with JS off nothing is ever hidden. */
+[data-reveal] {
+  transition:
+    opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 620ms var(--spring);
+}
+
+/* A little further up than before, so the overshoot on --spring reads as a
+   bounce settling into place rather than a twitch. */
+.js [data-reveal="out"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Hero entrance. Same .js scoping as the scroll reveal above: with JS off the
+   animation never applies and the hero is simply visible, unmoved. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The <h1> is the LCP element, so it must be opaque in the very first painted
+   frame: it lifts into place without ever fading. */
+@keyframes hero-rise-opaque {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.js [data-hero-item] {
+  animation: hero-rise 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.js h1[data-hero-item] {
+  animation-name: hero-rise-opaque;
+}
+
+/* 20ms lead-in + 60ms stagger + 400ms duration => the sequence ends at 660ms. */
+.js [data-hero-item]:nth-child(1) {
+  animation-delay: 20ms;
+}
+.js [data-hero-item]:nth-child(2) {
+  animation-delay: 80ms;
+}
+.js [data-hero-item]:nth-child(3) {
+  animation-delay: 140ms;
+}
+.js [data-hero-item]:nth-child(4) {
+  animation-delay: 200ms;
+}
+.js [data-hero-item]:nth-child(5) {
+  animation-delay: 260ms;
+}
+
+/* Collapsed pull requests stay in the DOM for crawlers and no-JS visitors;
+   only the `.js` path hides them behind the "Show more" toggle. */
+.js .pr-collapsed {
+  display: none;
+}
+
+/* Softer shapes: buttons and link-buttons become pills, cards get a rounder
+   corner than Tailwind's rounded-xl. Unlayered so it beats the utilities. */
+a[class~="rounded-lg"],
+button[class~="rounded-lg"] {
+  border-radius: 9999px;
+}
+
+.card-surface {
+  background-color: var(--bg-elevated);
+  /* A sheen that fades out by 45% gives the surface a lit top edge instead of
+     a flat fill. Cheap: one gradient, no blur, composited once. */
+  background-image: linear-gradient(180deg, var(--sheen), transparent 45%);
+  border: 1px solid var(--border);
+  border-radius: 1.15rem;
+  box-shadow: var(--shadow);
+  transition:
+    transform 320ms var(--spring),
+    border-color 200ms ease,
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Unlayered on purpose: this must beat the `hover:border-*` utility on Card.
+   The tilt is deliberately under half a degree: enough to feel alive, small
+   enough that body text inside never looks crooked. */
+.card-surface:hover {
+  transform: translateY(-4px) rotate(-0.35deg);
+  border-color: var(--accent-border);
+  box-shadow:
+    var(--shadow),
+    0 18px 42px -20px var(--glow),
+    0 0 0 1px var(--accent-soft);
+}
+
+/* ---------- Playful motion ----------
+   Everything below animates transform/opacity only, so it composites on the
+   GPU and never triggers layout. The reduced-motion block at the end of this
+   file already neutralises all of it via the catch-all animation/transition
+   overrides, so none of these need their own media query. */
+
+/* Overshoot easing. The whole "soft" feel comes from this one curve. */
+:root {
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Squishy press for buttons and link-buttons. */
+.squish {
+  transition: transform 220ms var(--spring);
+}
+
+.squish:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.squish:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Tags sit at a slight angle like stickers and straighten when touched. */
+.sticker {
+  transition: transform 260ms var(--spring);
+}
+
+.sticker:nth-child(odd) {
+  transform: rotate(-1.5deg);
+}
+
+.sticker:nth-child(even) {
+  transform: rotate(1.3deg);
+}
+
+.sticker:hover {
+  transform: rotate(0deg) scale(1.07);
+}
+
+/* Sparkles in the hero. Purely decorative and aria-hidden. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  animation: twinkle 3.4s ease-in-out infinite;
+}
+
+/* Marquee. The track holds the list twice, so translating exactly -50% lands
+   on a seamless loop. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Stickers drift; the mascot bobs. Both are transform-only and both inherit
+   the reduced-motion reset at the bottom of this file. */
+@keyframes float-slow {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+/* `translate` rather than `transform`, so the per-sticker rotate set inline
+   survives instead of being overwritten by the keyframe. */
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.bob {
+  animation: bob 4.5s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+
+/* The mascot perks up when you hover the card it sits on. */
+.mascot-host:hover .bob {
+  animation-duration: 1.6s;
+}
+
+/* The peeking mascot ducks and rises rather than drifting, so it reads as
+   looking over the edge it is holding. */
+/* Shallow on purpose: a deeper dip buries the smile behind the card edge. */
+@keyframes peek {
+  0%,
+  100% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.peek {
+  animation: peek 5s ease-in-out infinite;
+}
+
+/* Pops fully into view when the contact cards are hovered. */
+.mascot-host:hover .peek {
+  transform: translateY(-6px);
+  animation-play-state: paused;
+  transition: transform 320ms var(--spring);
+}
+
+/* The brand mark gives a little wave on hover. */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3.5deg);
+  }
+  75% {
+    transform: rotate(3.5deg);
+  }
+}
+
+.wiggle-on-hover:hover {
+  animation: wiggle 520ms ease-in-out;
+}
+
+/* The short rule beside each section eyebrow draws itself in on reveal. It
+   fades rose to violet and out, so it reads as a flourish rather than a hairline. */
+.section-rule {
+  transform-origin: left center;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 100ms;
+  background-image: linear-gradient(90deg, var(--accent), var(--accent-2) 70%, transparent);
+}
+
+.js [data-reveal="out"] .section-rule {
+  transform: scaleX(0);
+}
+
+/* Desktop nav links grow an accent underline on hover and keyboard focus. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.625rem;
+  bottom: 0.25rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Only fires when the theme actually flips, not on first paint. */
+.js body {
+  transition:
+    background-color 320ms ease,
+    color 320ms ease;
+}
+
+/* Respect users who ask for less motion: animations collapse to instant. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal="out"] {
+    opacity: 1;
+    transform: none;
+  }
+  /* These are states rather than durations, so the global overrides below
+     can't clear them, so they have to be reset explicitly. */
+  .js [data-reveal="out"] .section-rule,
+  .js .accent-glow {
+    transform: none;
+    animation: none;
+  }
+  .card-surface:hover {
+    transform: none;
+  }
+  /* `animation: none` also clears the staggered delays, so nothing waits. */
+  .js [data-hero-item],
+  .js h1[data-hero-item] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
 }

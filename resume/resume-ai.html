@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ikram Aloui &middot; Software Engineer</title>
+    <link rel="stylesheet" href="./resume.css" />
+  </head>
+  <body>
+    <header>
+      <div class="name">Ikram Aloui</div>
+      <div class="role">Software Engineer: Go, Kubernetes &amp; Cloud-Native Security</div>
+      <div class="contact">
+        <a href="mailto:ikramaloui145@gmail.com">ikramaloui145@gmail.com</a>
+        <span class="sep">|</span>Boumerdès, Algeria &middot; Remote
+        <br />
+        <a href="https://github.com/Aloui-Ikram">github.com/Aloui-Ikram</a>
+        <span class="sep">|</span
+        ><a href="https://www.linkedin.com/in/aloui-ikram/">linkedin.com/in/aloui-ikram</a>
+        <span class="sep">|</span
+        ><a href="https://ikram-portfolio.vercel.app">ikram-portfolio.vercel.app</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p class="summary">
+        Software engineer with merged pull requests in Harbor, the CNCF-graduated container
+        registry, and its ecosystem. That code was reviewed and accepted by upstream maintainers,
+        including a feature shipped in Harbor v2.15.0 and two security fixes backported to the
+        release branch. Works daily in a multi-agent Claude Code workflow, defining agent tasks,
+        reviewing agent-written code, and deciding what is accepted into production. Holds an M.Sc.
+        in Information Systems Security.
+      </p>
+    </section>
+
+    <section class="skills">
+      <h2>Technical Skills</h2>
+      <div class="line">
+        <span class="skill-label">Languages:</span> Go, Python, TypeScript/JavaScript, Java, C,
+        SQL/PLSQL, Bash
+      </div>
+      <div class="line">
+        <span class="skill-label">AI &amp; Agent Tooling:</span> Claude Code, Gemini, Codex;
+        multi-agent workflows, agent task design and evaluation, AI code review, code acceptance
+        decisions
+      </div>
+      <div class="line">
+        <span class="skill-label">Backend &amp; Infrastructure:</span> REST APIs, PostgreSQL, Redis,
+        Docker, Kubernetes, K3s, RKE2, Helm, containerd, OCI
+      </div>
+      <div class="line">
+        <span class="skill-label">Security Engineering:</span> Cosign, Sigstore, SBOM (CycloneDX,
+        SPDX), VEX, Trivy, SPIFFE/SPIRE, mTLS, CodeQL, threat modelling
+      </div>
+      <div class="line">
+        <span class="skill-label">Cloud &amp; CI/CD:</span> AWS (EKS, RDS, S3, IRSA), OpenStack,
+        GitHub Actions, GitLab, Ansible, Hugo
+      </div>
+      <div class="line">
+        <span class="skill-label">Testing &amp; Review:</span> Go unit and regression testing,
+        upstream code review, technical writing and documentation
+      </div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Software Engineer (Part-time)</span>
+            <span class="entry-org">&middot; 8gears AG</span>
+          </div>
+          <div class="entry-meta">Oct 2025 – Present</div>
+        </div>
+        <div class="entry-sub">Zurich, Switzerland (Remote) &middot; Intern until Jul 2026</div>
+        <p class="entry-summary">
+          Software engineering on Harbor, the CNCF-graduated container registry, and its ecosystem,
+          working daily in a <strong>multi-agent AI coding workflow</strong> and owning what reaches
+          production. Spans backend Go, security and supply-chain work, code review, and debugging
+          across the stack, carried through upstream maintainer review to merge.
+        </p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">LFX Mentee, Harbor Satellite</span>
+            <span class="entry-org">&middot; The Linux Foundation / CNCF</span>
+          </div>
+          <div class="entry-meta">Mar 2026 – May 2026</div>
+        </div>
+        <div class="entry-sub">Remote &middot; Competitive paid CNCF mentorship, Term 1, 2026</div>
+        <ul>
+          <li>
+            Selected from an open competitive application process, then designed and implemented a
+            <strong>security audit logging system</strong> end to end in Go: event schema, a
+            pluggable transport interface, and two transport implementations.
+          </li>
+          <li>
+            Iterated the design across 23 commits and multiple review rounds, refining the transport
+            interface boundary and testing strategy before merge.
+          </li>
+          <li>Authored the project's reference architecture and deployment guides.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Cybersecurity Intern</span>
+            <span class="entry-org">&middot; CERIST</span>
+          </div>
+          <div class="entry-meta">Feb 2025 – Jul 2025</div>
+        </div>
+        <div class="entry-sub">Algiers, Algeria &middot; M.Sc. thesis project</div>
+        <ul>
+          <li>
+            Built a Zero Trust Kubernetes platform from scratch: Cilium/eBPF micro-segmentation,
+            Istio mTLS, automated certificate management, and a full CI/CD chain.
+          </li>
+          <li>
+            Integrated real-time observability with Prometheus, Jaeger, and Kiali plus dynamic
+            network policies, and automated the DevSecOps chain with Harbor, Trivy, and
+            cert-manager.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Open Source &amp; Projects</h2>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Cosign v3 bundle signature format</span>, shipped in Harbor v2.15.0
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/22628">goharbor/harbor #22628</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Credential exfiltration fix in registry ping</span>, an
+          access-control flaw where request parameters overrode saved server state
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/23463">goharbor/harbor #23463</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Process crash from an unchecked type assertion</span>, root-caused
+          in an unrecovered goroutine and fixed with a recovery guard
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/23461">goharbor/harbor #23461</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Security audit logging with syslog and OpenTelemetry</span>,
+          verified end to end against Wazuh and Splunk
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/container-registry/harbor-satellite/pull/448"
+            >harbor-satellite #448</a
+          >
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">harbor-scanner-devguard</span>, a standalone Go service
+          implementing Harbor's pluggable scanner API: crane image pulls, CycloneDX and SPDX SBOMs
+          from a single syft pass, Cosign signing, and VEX-enriched results
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/Aloui-Ikram/harbor-scanner-devguard">personal project</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">M.Sc., Information Systems Security</span>
+            <span class="entry-org">&middot; USTHB, Algiers</span>
+          </div>
+          <div class="entry-meta">Sep 2023 – Jul 2025</div>
+        </div>
+        <div class="entry-sub">
+          Intrusion detection, cloud security, Zero Trust architecture, secure system administration.
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">B.Sc., Computer Science</span>
+            <span class="entry-org">&middot; USTHB, Algiers</span>
+          </div>
+          <div class="entry-meta">Sep 2020 – Jun 2023</div>
+        </div>
+        <div class="entry-sub">
+          Algorithms, data structures, databases, operating systems, and programming languages.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Writing &amp; Applied Research</h2>
+      <div class="line">
+        <a href="https://container-registry.com/posts/hardening-harbor-on-aws/"
+          ><strong>Hardening Harbor on AWS: Zero-Static-Secret Architecture</strong></a
+        >
+        <span class="muted">(container-registry.com engineering blog).</span> Eliminating long-lived
+        credentials with RDS IAM Authentication and IRSA, including the upstream code changes
+        required.
+      </div>
+      <div class="line">
+        <a
+          href="https://satellite.container-registry.com/blog/2026-03-23-k3s-reference-architecture/"
+          ><strong>K3s + Harbor Satellite at the Edge</strong></a
+        >
+        and
+        <a
+          href="https://satellite.container-registry.com/blog/2026-03-26-deploying-harbor-satellite-spiffe-spire/"
+          ><strong>Deploying Harbor Satellite with SPIFFE/SPIRE</strong></a
+        >
+        <span class="muted">(satellite.container-registry.com).</span> Reference architecture and
+        step-by-step deployment guides.
+      </div>
+      <div class="line">
+        <strong>Three technical reports</strong> <span class="muted">(2025)</span> on
+        <a href="https://drive.google.com/file/d/1a-R1e_zwp88h6fjtAzTPJ4OcMSpc8Ywd/view"
+          >secure software supply chains</a
+        >,
+        <a href="https://drive.google.com/file/d/10IMagzMAxF4El00ykzAsOkYsy3L1AEMM/view"
+          >runtime behavioural detection</a
+        >, and
+        <a href="https://drive.google.com/file/d/1f7LvNPHXLVg9ycUN5ASA3jkVtaidklAC/view"
+          >service-mesh observability</a
+        >, each built from scratch on self-managed Kubernetes and validated adversarially rather than
+        by assertion.
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications &amp; Languages</h2>
+      <div class="line">
+        Microsoft Azure Fundamentals (2024) &middot; Ethical Hacking: Cloud Computing, Cybrary
+        (2024) &middot; TryHackMe Advent of Cyber (2023)
+      </div>
+      <div class="line">Arabic (native) &middot; French (proficient) &middot; English (fluent)</div>
+    </section>
+  </body>
+</html>

@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ikram Aloui · Portfolio
 
-## Getting Started
+Personal site for Ikram Aloui, cloud-native security engineer. Built with Next.js 16 (App Router),
+Tailwind CSS v4, and Framer Motion.
 
-First, run the development server:
+Live at **[ikram-portfolio.vercel.app](https://ikram-portfolio.vercel.app)**.
+
+## Editing content
+
+**All site content lives in one file: [`src/content/data.ts`](src/content/data.ts).** Sections read
+from it, so adding a merged PR, a blog post, or a new role means editing that file only, with no
+component changes needed.
+
+Every claim in that file traces back to a verified source (GitHub API, the live blog posts, the
+technical report PDFs, or the CV). Please keep it that way: don't add a line you can't point at.
+
+Two framing rules are deliberate and worth preserving:
+
+- The research section is **"Technical Reports & Applied Research"**. Those three documents are
+  solo-authored technical reports, not peer-reviewed papers. Never label them "publications".
+- **No phone number anywhere**, including the resume PDFs. The security variant is served publicly
+  at `/Ikram_Aloui_Resume.pdf`, so anything on it is downloadable by anyone. Email is the contact
+  channel.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # production build
+npm start            # serve the production build
+npx tsc --noEmit     # typecheck
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Resume
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The resume lives in [`resume/`](resume/) and is generated from editable HTML + CSS via headless
+Chrome. Two variants share one stylesheet:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | Audience |
+| --- | --- |
+| `resume-security.html` | Cloud-native / security engineering roles |
+| `resume-ai.html` | AI-training platforms (Mercor, Shipd) and general software engineering |
 
-## Learn More
+```bash
+node resume/build.mjs
+```
 
-To learn more about Next.js, take a look at the following resources:
+This writes both PDFs into `resume/` and copies the security variant to
+`public/Ikram_Aloui_Resume.pdf`, which is what the site's "Download CV" button serves. Set
+`CHROME_BIN` if Chrome isn't on your `PATH`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To restyle both resumes at once, edit `resume/resume.css`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deployed to Vercel as its own project, separate from any earlier portfolio:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx vercel          # first run: links/creates the project
+npx vercel --prod   # deploy to production
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes on the build
+
+- **Scroll reveals are CSS-driven, not `whileInView`.** `Reveal` is a *server* component that only
+  emits `data-reveal="out"`; a single `<RevealObserver />` flips all ~74 of them to `"in"`. Keeping
+  those blocks out of the client bundle is what took Lighthouse performance from 89 to 94.
+- **Content is never hidden behind JavaScript.** The hidden start state is scoped behind a `.js`
+  class added by an inline head script before first paint, and the observer has a failsafe timer.
+  With JS disabled, or if IntersectionObserver never fires, every section renders fully visible
+  rather than permanently blank. The same applies to the collapsed pull requests, which stay in the
+  DOM (`.pr-collapsed`) so crawlers see all 20.
+- **`* { border-color }` must stay inside `@layer base`.** Unlayered rules outrank Tailwind's utility
+  layer, which would silently break every `border-[...]` utility on the site.
+- `npm` overrides pin patched `postcss` and `sharp` so `npm audit` reports zero vulnerabilities
+  without downgrading Next.js.

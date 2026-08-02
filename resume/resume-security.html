@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ikram Aloui, Cloud-Native Security Engineer</title>
+    <link rel="stylesheet" href="./resume.css" />
+  </head>
+  <body>
+    <header>
+      <div class="name">Ikram Aloui</div>
+      <div class="role">Cloud-Native Security Engineer</div>
+      <div class="contact">
+        <a href="mailto:ikramaloui145@gmail.com">ikramaloui145@gmail.com</a>
+        <span class="sep">|</span>Boumerdès, Algeria &middot; Remote
+        <br />
+        <a href="https://github.com/Aloui-Ikram">github.com/Aloui-Ikram</a>
+        <span class="sep">|</span
+        ><a href="https://www.linkedin.com/in/aloui-ikram/">linkedin.com/in/aloui-ikram</a>
+        <span class="sep">|</span
+        ><a href="https://ikram-portfolio.vercel.app">ikram-portfolio.vercel.app</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p class="summary">
+        Cloud-native security engineer with an M.Sc. in Information Systems Security, working on
+        Harbor, the CNCF-graduated container registry. Writes production Go that upstream
+        maintainers reviewed and merged: Cosign v3 bundle signature support released in Harbor
+        v2.15.0, and two security fixes backported to the v2.15.0 release branch. Built the security
+        audit logging system for Harbor Satellite, the project's edge companion, as a CNCF LFX
+        Mentorship deliverable.
+      </p>
+    </section>
+
+    <section class="skills">
+      <h2>Technical Skills</h2>
+      <div class="line">
+        <span class="skill-label">Supply Chain Security:</span> Cosign, Sigstore, SBOM (CycloneDX,
+        SPDX), VEX, Syft, Trivy, attestations, vulnerability disclosure, CodeQL
+      </div>
+      <div class="line">
+        <span class="skill-label">Cloud Native:</span> Kubernetes, K3s, RKE2, Docker, Helm, Rancher,
+        containerd, OCI, Harbor, Zot
+      </div>
+      <div class="line">
+        <span class="skill-label">Identity &amp; Zero Trust:</span> SPIFFE/SPIRE, mTLS, Istio,
+        Cilium/eBPF, cert-manager, OIDC, RBAC
+      </div>
+      <div class="line">
+        <span class="skill-label">Languages:</span> Go, Python, TypeScript/JavaScript, Java, C,
+        SQL/PLSQL
+      </div>
+      <div class="line">
+        <span class="skill-label">Cloud &amp; CI/CD:</span> AWS (EKS, RDS, S3, IRSA), OpenStack,
+        GitHub Actions, GitLab, Ansible
+      </div>
+      <div class="line">
+        <span class="skill-label">Observability:</span> Prometheus, Grafana, Jaeger, Kiali,
+        OpenTelemetry, syslog/RFC 5424, Wazuh, Splunk
+      </div>
+      <div class="line">
+        <span class="skill-label">AI &amp; Agent Tooling:</span> Claude Code, Gemini, Codex;
+        multi-agent workflows, agent task design and evaluation, AI code review
+      </div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Software Engineer (Part-time)</span>
+            <span class="entry-org">&middot; 8gears AG</span>
+          </div>
+          <div class="entry-meta">Oct 2025 – Present</div>
+        </div>
+        <div class="entry-sub">Zurich, Switzerland (Remote) &middot; Intern until Jul 2026</div>
+        <p class="entry-summary">
+          Security engineering across Harbor core, Harbor Satellite, and internal tooling:
+          supply-chain security, vulnerability discovery and remediation, and hardening of the
+          registry and its release infrastructure. Work ships as production Go, reviewed and merged
+          upstream, with fixes backported to supported release branches.
+        </p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">LFX Mentee, Harbor Satellite</span>
+            <span class="entry-org">&middot; The Linux Foundation / CNCF</span>
+          </div>
+          <div class="entry-meta">Mar 2026 – May 2026</div>
+        </div>
+        <div class="entry-sub">Remote &middot; Competitive paid CNCF mentorship, Term 1, 2026</div>
+        <ul>
+          <li>
+            Designed and implemented <strong>security audit logging</strong> end to end in Go across
+            Ground Control and Satellite: canonical JSON event schema, a pluggable transport
+            interface, and syslog (RFC 5424) and OpenTelemetry (OTLP/HTTP) transports.
+          </li>
+          <li>Verified the pipeline against live <strong>Wazuh and Splunk</strong> deployments.</li>
+          <li>
+            Authored the project's K3s reference architecture and SPIFFE/SPIRE deployment guides,
+            and the Hugo blog infrastructure that publishes them.
+          </li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Cybersecurity Intern</span>
+            <span class="entry-org">&middot; CERIST</span>
+          </div>
+          <div class="entry-meta">Feb 2025 – Jul 2025</div>
+        </div>
+        <div class="entry-sub">Algiers, Algeria &middot; M.Sc. thesis project</div>
+        <ul>
+          <li>
+            Built a <strong>Zero Trust architecture</strong> for cloud-native workloads: Kubernetes
+            micro-segmentation with Cilium/eBPF and mTLS through Istio.
+          </li>
+          <li>
+            Automated the DevSecOps chain: Harbor, Trivy, and Cosign in CI/CD, certificate rotation
+            via cert-manager, and multi-cluster administration through Rancher.
+          </li>
+          <li>
+            Added real-time observability with Prometheus, Jaeger, and Kiali alongside dynamic
+            network policies.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected Open Source Contributions</h2>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Cosign v3 bundle signature format</span>, shipped in Harbor v2.15.0
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/22628">goharbor/harbor #22628</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Credential exfiltration fix in registry ping</span>, backported to
+          release-2.15.0 with a regression test
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/23463">goharbor/harbor #23463</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Cosign keyless signing for Harbor releases</span>, every release
+          from v2.15.0 onward ships a verifiable signature bundle
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/22578">goharbor/harbor #22578</a>
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Security audit logging with syslog and OpenTelemetry</span>,
+          delivered as the CNCF LFX Mentorship project
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/container-registry/harbor-satellite/pull/448"
+            >harbor-satellite #448</a
+          >
+        </div>
+      </div>
+      <div class="pr">
+        <div>
+          <span class="pr-title">Process crash fix in the audit event resolver</span>, backported to
+          release-2.15.0
+        </div>
+        <div class="pr-ref">
+          <a href="https://github.com/goharbor/harbor/pull/23461">goharbor/harbor #23461</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">M.Sc., Information Systems Security</span>
+            <span class="entry-org">&middot; USTHB, Algiers</span>
+          </div>
+          <div class="entry-meta">Sep 2023 – Jul 2025</div>
+        </div>
+        <div class="entry-sub">
+          Intrusion detection, cloud security, Zero Trust architecture, secure system administration.
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">B.Sc., Computer Science</span>
+            <span class="entry-org">&middot; USTHB, Algiers</span>
+          </div>
+          <div class="entry-meta">Sep 2020 – Jun 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Writing &amp; Applied Research</h2>
+      <div class="line">
+        <a href="https://container-registry.com/posts/hardening-harbor-on-aws/"
+          ><strong>Hardening Harbor on AWS: Zero-Static-Secret Architecture</strong></a
+        >
+        <span class="muted">(container-registry.com).</span> RDS IAM Authentication and IRSA,
+        removing every long-lived credential from a Harbor deployment.
+      </div>
+      <div class="line">
+        <a
+          href="https://satellite.container-registry.com/blog/2026-03-23-k3s-reference-architecture/"
+          ><strong>K3s + Harbor Satellite at the Edge</strong></a
+        >
+        and
+        <a
+          href="https://satellite.container-registry.com/blog/2026-03-26-deploying-harbor-satellite-spiffe-spire/"
+          ><strong>Deploying Harbor Satellite with SPIFFE/SPIRE</strong></a
+        >
+        <span class="muted">(satellite.container-registry.com).</span> Reference architecture and
+        step-by-step deployment guides.
+      </div>
+      <div class="line">
+        <a href="https://drive.google.com/file/d/1a-R1e_zwp88h6fjtAzTPJ4OcMSpc8Ywd/view"
+          ><strong>Implementing a Secure Software Supply Chain</strong></a
+        >
+        <span class="muted">(technical report, 2025).</span> An RKE2, Longhorn, and Harbor platform
+        with Trivy scanning and Cosign signing, proven when Harbor's policy blocked a vulnerable
+        image from being pulled into the cluster.
+      </div>
+      <div class="line">
+        <a href="https://drive.google.com/file/d/1f7LvNPHXLVg9ycUN5ASA3jkVtaidklAC/view"
+          ><strong>From Blind Spots to Full Visibility</strong></a
+        >
+        <span class="muted">(CERIST technical report, 2025).</span> Zero-code Istio observability for
+        an 11-service application; a simulated 2,000+ req/s DDoS was detected within 60 seconds by a
+        custom Prometheus alerting rule.
+      </div>
+      <div class="line">
+        <a href="https://drive.google.com/file/d/10IMagzMAxF4El00ykzAsOkYsy3L1AEMM/view"
+          ><strong>Hands-On Exploration of Bill of Behaviour</strong></a
+        >
+        <span class="muted">(technical report, 2025).</span> Runtime behavioural profiling on
+        Kubernetes, catching a live command injection that SBOM-only static analysis misses.
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications &amp; Languages</h2>
+      <div class="line">
+        Microsoft Azure Fundamentals (2024) &middot; Ethical Hacking: Cloud Computing, Cybrary
+        (2024) &middot; TryHackMe Advent of Cyber (2023)
+      </div>
+      <div class="line">Arabic (native) &middot; French (proficient) &middot; English (fluent)</div>
+    </section>
+  </body>
+</html>

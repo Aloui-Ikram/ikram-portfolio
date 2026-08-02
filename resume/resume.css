@@ -1,0 +1,271 @@
+/*
+ * Resume stylesheet, shared by both variants.
+ * ATS-friendly by construction: single column, no tables, no floats, no
+ * multi-column layout, real selectable text, standard section headings.
+ * Edit this file to restyle both PDFs at once, then run `node resume/build.mjs`.
+ */
+
+@page {
+  size: A4;
+  margin: 13mm 14mm;
+}
+
+:root {
+  --ink: #15171c;
+  --ink-soft: #363b45;
+  --ink-mute: #626976;
+  --rule: #ccd2dc;
+  /* One accent, used only on the name rule, section headings and links.
+     Navy reads as conventional-professional in a way teal or plum does not. */
+  --accent: #1c3d5a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10.3pt;
+}
+
+body {
+  font-family: "Source Sans 3", "Source Sans Pro", Carlito, Calibri, "Helvetica Neue", Arial,
+    sans-serif;
+  color: var(--ink);
+  line-height: 1.42;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* A linked title has to out-specify the `.line strong` / `li strong` rules that
+   would otherwise repaint it ink and leave nothing signalling it is clickable. */
+.line a strong,
+.entry-summary a strong,
+li a strong {
+  color: var(--accent);
+}
+
+/* ---------- Header ---------- */
+
+header {
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.name {
+  font-size: 23pt;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+
+.role {
+  margin-top: 3px;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.contact {
+  margin-top: 7px;
+  font-size: 9.2pt;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.contact .sep {
+  color: var(--rule);
+  padding: 0 6px;
+}
+
+/* ---------- Sections ---------- */
+
+section {
+  margin-top: 13px;
+}
+
+h2 {
+  font-size: 9.6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  /* Kept low: 0.11em split EDUCATION into "E D U C AT I O N" in the extracted
+     text layer, which is exactly the heading ATS parsers key on. */
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 7px;
+}
+
+.summary {
+  font-size: 9.9pt;
+  color: var(--ink-soft);
+  line-height: 1.46;
+}
+
+/* ---------- Entries ---------- */
+
+.entry {
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.entry-title {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.entry-org {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.entry-meta {
+  font-size: 9pt;
+  color: var(--ink-mute);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.entry-sub {
+  font-size: 9.2pt;
+  color: var(--ink-mute);
+  margin-top: 1px;
+}
+
+/* A role summarised in prose instead of bullets, for work whose specifics are
+   already itemised under Open Source. Same treatment the portfolio gives it. */
+.entry-summary {
+  margin-top: 4px;
+  font-size: 9.8pt;
+  color: var(--ink-soft);
+  line-height: 1.42;
+}
+
+.entry-summary strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+ul {
+  list-style: none;
+  margin-top: 5px;
+}
+
+li {
+  position: relative;
+  padding-left: 11px;
+  margin-bottom: 3.5px;
+  font-size: 9.8pt;
+  color: var(--ink-soft);
+  line-height: 1.42;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--ink-mute);
+}
+
+li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Open source ---------- */
+
+/* Receipts, not a second Experience section: one line each, because the work
+   itself is already described under the role that produced it. The ref is a
+   right-aligned column rather than inline, so it can never orphan onto its
+   own line the way a nowrap span at the end of a sentence does. */
+.pr {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+  font-size: 9.7pt;
+  color: var(--ink-soft);
+  line-height: 1.42;
+  break-inside: avoid;
+}
+
+.pr:last-child {
+  margin-bottom: 0;
+}
+
+.pr-title {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.pr-ref {
+  font-size: 9pt;
+  color: var(--ink-mute);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pr-note {
+  font-size: 9.2pt;
+  color: var(--ink-mute);
+  margin-top: 5px;
+}
+
+/* ---------- Compact lists ---------- */
+
+.line {
+  font-size: 9.7pt;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+  line-height: 1.42;
+}
+
+.line:last-child {
+  margin-bottom: 0;
+}
+
+.line strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.skills .line {
+  margin-bottom: 3.5px;
+}
+
+.skill-label {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--ink-mute);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
