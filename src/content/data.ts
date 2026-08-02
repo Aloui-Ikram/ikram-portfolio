@@ -5,12 +5,21 @@
  * Nothing is invented. Do not add a claim without a source.
  */
 
+/**
+ * GitHub Pages serves the site from /<repo>, so absolute paths need the prefix.
+ * Next rewrites <Link> and next/image automatically but NOT a raw
+ * `<a href="/...">`, which is exactly how the CV download link works, so it is
+ * built from this constant instead. Keep in step with `basePath` in
+ * next.config.ts; on a root domain both become empty.
+ */
+const BASE_PATH = "/ikram-portfolio";
+
 export const site = {
   name: "Ikram Aloui",
   title: "Cloud-Native Security Engineer",
   tagline:
     "I turn security concepts into real-world implementation across open source, Kubernetes, and the software supply chain, and I write about what I learn.",
-  url: "https://ikram-portfolio.vercel.app",
+  url: `https://aloui-ikram.github.io${BASE_PATH}`,
   locale: "en",
   location: "Boumerdès, Algeria",
   email: "ikramaloui145@gmail.com",
@@ -18,7 +27,7 @@ export const site = {
   githubHandle: "Aloui-Ikram",
   linkedin: "https://www.linkedin.com/in/aloui-ikram/",
   linkedinHandle: "in/aloui-ikram",
-  resumePath: "/Ikram_Aloui_Resume.pdf",
+  resumePath: `${BASE_PATH}/Ikram_Aloui_Resume.pdf`,
   description:
     "Software engineer at 8gears AG working on Harbor, the CNCF-graduated container registry, with a focus on cloud-native and supply-chain security. Merged contributions across Harbor core, Harbor Satellite, and harbor-next covering Cosign signature support, supply-chain hardening, and security audit logging.",
 } as const;
