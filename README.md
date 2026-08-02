@@ -40,7 +40,7 @@ Chrome. Two variants share one stylesheet:
 | File | Audience |
 | --- | --- |
 | `resume-security.html` | Cloud-native / security engineering roles |
-| `resume-ai.html` | AI-training platforms (Mercor, Shipd) and general software engineering |
+| `resume-ai.html` | General software engineering roles |
 
 ```bash
 node resume/build.mjs

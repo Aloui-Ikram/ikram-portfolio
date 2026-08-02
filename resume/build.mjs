@@ -43,7 +43,7 @@ const VARIANTS = [
   {
     src: "resume-ai.html",
     out: "Ikram_Aloui_Resume_SoftwareEngineer.pdf",
-    label: "AI-training platforms (Mercor, Shipd) and general SWE roles",
+    label: "General software engineering roles",
     public: false,
   },
 ];
