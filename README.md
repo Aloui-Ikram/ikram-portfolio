@@ -1,7 +1,7 @@
 # Ikram Aloui · Portfolio
 
-Personal site for Ikram Aloui, cloud-native security engineer. Built with Next.js 16 (App Router),
-Tailwind CSS v4, and Framer Motion.
+Personal site for Ikram Aloui, software engineer working on cloud-native security. Built with
+Next.js 16 (App Router), Tailwind CSS v4, and Framer Motion.
 
 Live at **[aloui-ikram.github.io/ikram-portfolio](https://aloui-ikram.github.io/ikram-portfolio/)**.
 
