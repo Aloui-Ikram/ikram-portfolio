@@ -16,7 +16,7 @@ const BASE_PATH = "/ikram-portfolio";
 
 export const site = {
   name: "Ikram Aloui",
-  title: "Cloud-Native Security Engineer",
+  title: "Software Engineer",
   tagline:
     "I turn security concepts into real-world implementation across open source, Kubernetes, and the software supply chain, and I write about what I learn.",
   url: `https://aloui-ikram.github.io${BASE_PATH}`,
@@ -35,12 +35,11 @@ export const site = {
 export const about = {
   headline: "From full-stack developer to supply-chain security engineer.",
   paragraphs: [
-    "I'm a cloud-native security engineer from Algeria. I hold an M.Sc. in Information Systems Security from USTHB, where I specialised in intrusion detection, cloud security, and Zero Trust architecture. For my thesis I built a secure multi-tenant Kubernetes platform from the ground up.",
+    "I'm a software engineer from Algeria working on cloud-native security. I hold an M.Sc. in Information Systems Security from USTHB, where I specialised in intrusion detection, cloud security, and Zero Trust architecture. For my thesis I built a secure multi-tenant Kubernetes platform from the ground up.",
     "Today I work remotely for 8gears AG in Switzerland on Harbor, the CNCF-graduated container registry. I started as an intern in October 2025 and have been a part-time software engineer since July 2026. In between, I was selected for the competitive CNCF LFX Mentorship (Term 1, 2026) on Harbor Satellite.",
-    "My work sits where security meets cloud infrastructure: container registries, AWS, Kubernetes, and the supply chain that connects them. 22 merged pull requests across Harbor and its ecosystem, several of them security fixes backported to release branches.",
+    "My work sits where security meets cloud infrastructure: container registries, AWS, Kubernetes, and the supply chain that connects them. I contribute across Harbor and its ecosystem, including security fixes backported to release branches.",
   ],
   facts: [
-    { label: "Merged PRs", value: "22", detail: "across Harbor core & ecosystem" },
     { label: "CNCF", value: "LFX '26", detail: "Harbor Satellite mentee" },
     { label: "Based in", value: "Algeria", detail: "working remotely for Switzerland" },
   ],

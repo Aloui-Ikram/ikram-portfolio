@@ -193,7 +193,7 @@ export function Hero() {
           </span>
 
           {/* gap-px over a border-coloured surface draws the hairline separators. */}
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--border)] shadow-[var(--shadow)] sm:grid-cols-3">
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--border)] shadow-[var(--shadow)] sm:grid-cols-2">
             {about.facts.map((fact) => (
               <div
                 key={fact.label}
