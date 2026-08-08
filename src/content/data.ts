@@ -142,7 +142,7 @@ export const timeline: TimelineEntry[] = [
     highlights: [
       "Designed and implemented the security audit logging feature end to end through multiple maintainer review rounds: a structured JSON schema, a pluggable Go Transport interface, and syslog (RFC 5424) + OpenTelemetry (OTLP/HTTP) transports.",
       "Authored the project's K3s reference architecture guide and a SPIFFE/SPIRE deployment walkthrough.",
-      "Built the project's Hugo blog infrastructure and published its first two technical posts.",
+      "Built the project's Hugo blog infrastructure and published its first three technical posts, including the writeup of the audit logging feature.",
     ],
   },
 ];
@@ -456,6 +456,16 @@ export type BlogPost = {
 };
 
 export const blog: BlogPost[] = [
+  {
+    title:
+      "Audit Logging Lands in Harbor Satellite: Security Events over Syslog and OpenTelemetry",
+    url: "https://satellite.container-registry.com/blog/2026-07-03-audit-logging-lands-in-harbor-satellite/",
+    date: "July 2026",
+    publication: "satellite.container-registry.com",
+    summary:
+      "The security audit log that shipped in Harbor Satellite PR #448, covering both Ground Control and every edge Satellite. Each security-relevant action becomes one line of JSON on a stable 17-field schema where event_type is always {resource_type}.{operation}.{outcome}, so alerting rules can key on it, and config changes carry a field-by-field diff with secrets redacted. Two transports ship: RFC 5424 syslog to a daemon, a network SIEM endpoint, or a rotated local file for air-gapped sites, and OTLP/HTTP to an OpenTelemetry Collector, which closes the gap where SIEMs treat JSON-over-syslog as one opaque blob. Verified end to end against Wazuh, Splunk, and a Grafana Loki dashboard.",
+    tags: ["Audit logging", "OpenTelemetry", "Syslog", "SIEM"],
+  },
   {
     title: "Hardening Harbor on AWS: Achieving Zero-Static-Secret Architecture",
     url: "https://container-registry.com/posts/hardening-harbor-on-aws/",
